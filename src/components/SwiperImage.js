@@ -5,7 +5,7 @@ import { width, height } from '../utils/constants';
 export const SwiperImage = media => {
   // console.log(media.media[0]);
   const renderItem = item => {
-    return <Image source={{ uri: item }} style={{ width: 500, height: 200 }} />;
+    return <Image source={{ uri: item }} style={{ width: 500, height: 300 }} />;
   };
 
   return (

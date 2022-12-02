@@ -1,13 +1,20 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { SwiperImage } from './SwiperImage';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { username } from 'react-lorem-ipsum';
 
-export const Post = ({ username, caption, media = [] }) => {
+export const Post = ({ username: postedBy, caption, media = [] }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState();
+  const [likedBy, setLikedBy] = useState('');
 
   const [tapCount, setTapCount] = useState(0);
+
+  useEffect(() => {
+    setLikedBy(username());
+  }, []);
+
   // console.log(username);
   const onPress = () => {
     if (tapCount === 1) {
@@ -34,7 +41,7 @@ export const Post = ({ username, caption, media = [] }) => {
             color={'black'}
             style={styles.avatarImage}
           />
-          <Text style={styles.usernameText}>{username}</Text>
+          <Text style={styles.usernameText}>{postedBy}</Text>
         </View>
         {media.length === 1 ? <View /> : <SwiperImage media={media} />}
         <View style={styles.infoContainer}>
@@ -45,9 +52,14 @@ export const Post = ({ username, caption, media = [] }) => {
               name={isLiked ? 'heart' : 'heart-o'}
             />
           </TouchableOpacity>
+          <View style={{ flex: 1, flexDirection: 'row' }}>
+            <Text style={styles.captionText}>Liked by </Text>
+            <Text style={styles.captionText}>{likedBy}</Text>
+            <Text style={styles.captionText}> and others</Text>
+          </View>
         </View>
         <View style={styles.captionContainer}>
-          <Text style={styles.captionUsernameText}> {username} </Text>
+          <Text style={styles.captionUsernameText}> {postedBy} </Text>
           <Text style={styles.captionText}> {caption} </Text>
         </View>
       </View>
@@ -57,10 +69,10 @@ export const Post = ({ username, caption, media = [] }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 40,
+    marginVertical: 15,
   },
   header: {
-    padding: 15,
+    padding: 0,
   },
   avatarImage: {
     marginRight: 10,
@@ -69,7 +81,7 @@ const styles = StyleSheet.create({
   headerUserContainer: {
     flex: 1,
     flexDirection: 'row',
-    marginVertical: 10,
+    marginBottom: 10,
     marginStart: 10,
   },
   locationText: {
@@ -77,7 +89,6 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
-    flexDirection: 'row',
     marginVertical: 10,
     marginStart: 10,
   },
