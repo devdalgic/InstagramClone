@@ -21,30 +21,30 @@ export const LoginScreen = () => {
   const Login = async () => {
     setIsLoading(true);
     try {
-      await EncryptedStorage.setItem(
+      EncryptedStorage.setItem(
         'user_session',
         JSON.stringify({
           username: username,
           password: password,
         }),
-      );
-      setIsSignedIn(true);
+      ).then(() => {
+        setIsSignedIn(true);
+      });
     } catch (error) {
       // There was an error on the native side
     }
   };
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Login Screen</Text>
-      <Text>Username</Text>
+    <View style={styles.container}>
+      <Text style={styles.label}>Username</Text>
       <TextInput
         style={styles.input}
         onChangeText={onChangeUsername}
         value={username}
         editable={!isLoading}
       />
-      <Text>Password</Text>
+      <Text style={styles.label}>Password</Text>
       <TextInput
         style={styles.input}
         onChangeText={onChangePassword}
@@ -52,13 +52,6 @@ export const LoginScreen = () => {
         editable={!isLoading}
         secureTextEntry
       />
-      {/*<Button*/}
-      {/*  onPress={Login}*/}
-      {/*  title="Login"*/}
-      {/*  color="#841584"*/}
-      {/*  accessibilityLabel="Login"*/}
-      {/*  disabled={isLoading}*/}
-      {/*/>*/}
       <TouchableOpacity
         style={styles.button}
         onPress={Login}
@@ -70,6 +63,15 @@ export const LoginScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    marginHorizontal: 10,
+  },
+  label: {
+    color: 'black',
+    marginStart: 12,
+  },
   input: {
     height: 40,
     margin: 12,
@@ -79,6 +81,7 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: '#841584',
-    padding: 10,
+    paddingVertical: 10,
+    marginHorizontal: 10,
   },
 });

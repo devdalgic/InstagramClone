@@ -31,6 +31,7 @@ import { SplashScreen } from './src/screens/SplashScreen';
 import { LoginScreen } from './src/screens/LoginScreen';
 import { createServer } from 'miragejs';
 import { mockServerConfig } from './src/utils/MockServerConfig';
+import { FeedScreen } from './src/screens/FeedScreen';
 
 if (window.server) {
   server.shutdown();
@@ -66,8 +67,12 @@ const App: () => Node = () => {
   return (
     <NavigationContainer>
       <AuthContext.Provider value={{ isSignedIn, setIsSignedIn }}>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={LoginScreen} />
+        <Stack.Navigator initialRouteName="Login">
+          {isSignedIn ? (
+            <Stack.Screen name="Feed" component={FeedScreen} />
+          ) : (
+            <Stack.Screen name="Login" component={LoginScreen} />
+          )}
         </Stack.Navigator>
       </AuthContext.Provider>
     </NavigationContainer>
