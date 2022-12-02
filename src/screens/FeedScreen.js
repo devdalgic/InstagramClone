@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -6,31 +6,35 @@ import {
   View,
   RefreshControl,
 } from 'react-native';
-import Icon from 'react-native-ionicons';
 import { Post } from '../components/Post';
 
 export const FeedScreen = () => {
-  const [loading, setLoading] = useState(true);
-  const [data] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    fetch('/api/getFeedContent').then(res => {
+      setData(JSON.parse(res._bodyText));
+      setIsLoading(false);
+    });
+  }, []);
+
   const refresh = () => {
-    setLoading(true);
-    // TODO
-    setLoading(false);
+    setIsLoading(true);
+    fetch('/api/getFeedContent').then(res => {
+      setData(res);
+    });
+    setIsLoading(false);
   };
-  const renderPost = ({ item: post }) => <Post {...post} />;
-  const keyExtractor = item => item.id;
   return (
     <View style={styles.container}>
-      {loading ? (
-        <ActivityIndicator />
+      {isLoading ? (
+        <ActivityIndicator color={'#841584'} />
       ) : (
         <FlatList
           data={data}
-          renderItem={renderPost}
-          keyExtractor={keyExtractor}
-          refreshControl={
-            <RefreshControl refreshing={loading} onRefresh={refresh} />
-          }
+          renderItem={({ item }) => <Post {...item} />}
+          keyExtractor={(item, index) => index}
         />
       )}
     </View>
@@ -40,7 +44,5 @@ export const FeedScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
