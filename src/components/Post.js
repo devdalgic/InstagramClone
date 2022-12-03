@@ -6,8 +6,10 @@ import { username } from 'react-lorem-ipsum';
 
 export const Post = ({ username: postedBy, caption, media = [] }) => {
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState();
   const [likedBy, setLikedBy] = useState('');
+  const [isCommented, setIsCommented] = useState(false);
+  const [isMessaged, setIsMessaged] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
   const [tapCount, setTapCount] = useState(0);
 
@@ -30,6 +32,15 @@ export const Post = ({ username: postedBy, caption, media = [] }) => {
   const doubleTap = () => {
     setIsLiked(!isLiked);
   };
+  const toggleComment = () => {
+    setIsCommented(!isCommented);
+  };
+  const toggleMessage = () => {
+    setIsMessaged(!isMessaged);
+  };
+  const toggleBookmark = () => {
+    setIsBookmarked(!isBookmarked);
+  };
 
   return (
     <View style={styles.container}>
@@ -38,21 +49,44 @@ export const Post = ({ username: postedBy, caption, media = [] }) => {
           <Icon
             name={'user-circle'}
             size={32}
-            color={'black'}
+            color={'#841584'}
             style={styles.avatarImage}
           />
           <Text style={styles.usernameText}>{postedBy}</Text>
         </View>
         {media.length === 1 ? <View /> : <SwiperImage media={media} />}
         <View style={styles.infoContainer}>
-          <TouchableOpacity onPress={doubleTap}>
-            <Icon
-              size={32}
-              color={isLiked ? 'red' : 'black'}
-              name={isLiked ? 'heart' : 'heart-o'}
-            />
-          </TouchableOpacity>
-          <View style={{ flex: 1, flexDirection: 'row' }}>
+          <View style={styles.actionContainer}>
+            <TouchableOpacity onPress={doubleTap} style={styles.actionButton}>
+              <Icon
+                size={32}
+                color={isLiked ? 'red' : 'black'}
+                name={isLiked ? 'heart' : 'heart-o'}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={toggleComment} style={styles.actionButton}>
+              <Icon
+                size={32}
+                color={'black'}
+                name={isCommented ? 'comment' : 'comment-o'}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={toggleMessage} style={styles.actionButton}>
+              <Icon
+                size={32}
+                color={'black'}
+                name={isMessaged ? 'paper-plane' : 'paper-plane-o'}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={toggleBookmark} style={styles.bookmarkButton}>
+              <Icon
+                size={32}
+                color={'black'}
+                name={isBookmarked ? 'bookmark' : 'bookmark-o'}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.likedByContainer}>
             <Text style={styles.captionText}>Liked by </Text>
             <Text style={styles.captionText}>{likedBy}</Text>
             <Text style={styles.captionText}> and others</Text>
@@ -91,6 +125,21 @@ const styles = StyleSheet.create({
     flex: 1,
     marginVertical: 10,
     marginStart: 10,
+  },
+  actionContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  actionButton: {
+    marginHorizontal: 10,
+  },
+  bookmarkButton: {
+    position: 'absolute',
+    right: 20,
+  },
+  likedByContainer: {
+    flex: 1,
+    flexDirection: 'row',
   },
   captionContainer: {
     flex: 1,

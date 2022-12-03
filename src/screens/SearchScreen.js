@@ -4,40 +4,45 @@ import {
   FlatList,
   StyleSheet,
   View,
-  RefreshControl,
+  Image,
 } from 'react-native';
-import { Post } from '../components/Post';
+import { width } from '../utils/constants';
 
-export const FeedScreen = () => {
+export const SearchScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [isRefreshing, setIsRefreshing] = useState(false);
   const [data, setData] = useState();
 
   useEffect(() => {
-    fetch('/api/getFeedContent').then(res => {
+    fetch('/api/getSearchContent').then(res => {
       setData(JSON.parse(res._bodyText));
       setIsLoading(false);
+      console.log(res._bodyText);
     });
   }, []);
 
-  const onRefresh = () => {
-    setIsRefreshing(true);
-    fetch('/api/getFeedContent').then(res => {
-      setData(JSON.parse(res._bodyText));
-      setIsRefreshing(false);
+  const refresh = () => {
+    setIsLoading(true);
+    fetch('/api/getSearchContent').then(res => {
+      setData(res);
     });
+    setIsLoading(false);
   };
   return (
     <View style={styles.container}>
       {isLoading ? (
-        <ActivityIndicator color={'#841584'} size={'large'} />
+        <ActivityIndicator color={'#841584'} />
       ) : (
         <FlatList
+          numColumns={3}
+          horizontal={false}
           data={data}
-          renderItem={({ item }) => <Post {...item} />}
+          renderItem={({ item }) => (
+            <Image
+              source={{ uri: item.source }}
+              style={{ width: width / 3, height: 300 }}
+            />
+          )}
           keyExtractor={(item, index) => index}
-          onRefresh={onRefresh}
-          refreshing={isRefreshing}
         />
       )}
     </View>
