@@ -1,6 +1,8 @@
 import { Response } from 'miragejs';
 import { loremIpsum, username } from 'react-lorem-ipsum';
-import { getRandomPicture } from './RandomMedia';
+import { getRandomPicture, getRandomVideo } from './RandomMedia';
+
+const mediaTypes = ['image', 'image', 'video'];
 
 export const mockServerConfig = {
   routes() {
@@ -11,100 +13,40 @@ export const mockServerConfig = {
       },
       { timing: 1000 },
     );
-    this.get('/api/getPicture', () => {
-      return ['Interstellar', 'Inception', 'Dunkirk'];
-    });
-    this.get(
-      '/api/login',
-      () => {
-        return new Response(200);
-      },
-      { timing: 2000 },
-    );
     this.get('/api/getFeedContent', () => {
-      return [
-        {
-          id: 0,
+      let result = [];
+      const objectCount = 10;
+      let currentType = '';
+      for (let i = 0; i < objectCount; i++) {
+        currentType = mediaTypes[Math.floor(Math.random() * mediaTypes.length)];
+        result.push({
+          id: i,
           username: username(),
-          type: 'image',
+          type: currentType,
           caption: loremIpsum({ avgSentencesPerParagraph: 1 }),
-          media: [getRandomPicture(), getRandomPicture()],
-        },
-        {
-          id: 1,
-          username: username(),
-          type: 'video',
-          caption: loremIpsum({ avgSentencesPerParagraph: 1 }),
-          media: [
-            'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-          ],
-        },
-        {
-          id: 2,
-          username: username(),
-          type: 'image',
-          caption: loremIpsum({ avgSentencesPerParagraph: 1 }),
-          media: [getRandomPicture(), getRandomPicture()],
-        },
-        {
-          id: 3,
-          username: username(),
-          type: 'image',
-          caption: loremIpsum({ avgSentencesPerParagraph: 1 }),
-          media: [getRandomPicture(), getRandomPicture()],
-        },
-        {
-          id: 4,
-          username: username(),
-          type: 'image',
-          caption: loremIpsum({ avgSentencesPerParagraph: 1 }),
-          media: [getRandomPicture(), getRandomPicture()],
-        },
-      ];
+          media:
+            currentType === 'image'
+              ? [getRandomPicture(), getRandomPicture()]
+              : [getRandomVideo()],
+        });
+        console.log(currentType + result[result.length-1].media[0]);
+      }
+      return result;
     });
     this.get('/api/getSearchContent', () => {
-      return [
-        {
-          id: 0,
-          source: getRandomPicture(),
-        },
-        {
-          id: 1,
-          source: getRandomPicture(),
-        },
-        {
-          id: 2,
-          source: getRandomPicture(),
-        },
-        {
-          id: 3,
-          source: getRandomPicture(),
-        },
-        {
-          id: 4,
-          source: getRandomPicture(),
-        },
-        {
-          id: 5,
-          source: getRandomPicture(),
-        },
-        {
-          id: 6,
-          source: getRandomPicture(),
-        },
-        {
-          id: 7,
-          source: getRandomPicture(),
-        },
-        {
-          id: 8,
-          source: getRandomPicture(),
-        },
-        {
-          id: 9,
-          source: getRandomPicture(),
-        },
-      ];
+      let result = [];
+      const objectCount = 21;
+      let currentType = '';
+      for (let i = 0; i < objectCount; i++) {
+        currentType = mediaTypes[Math.floor(Math.random() * mediaTypes.length)];
+        result.push({
+          id: i,
+          type: currentType,
+          source:
+            currentType === 'image' ? getRandomPicture() : getRandomVideo(),
+        });
+      }
+      return result;
     });
   },
 };

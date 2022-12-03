@@ -62,6 +62,7 @@ export const Post = ({ username: postedBy, type, caption, media = [] }) => {
             source={{ uri: media[0] }}
             style={styles.video}
             repeat={true}
+            resizeMode={'cover'}
           />
         )}
         {/*{media.length === 1 ? <View /> : <SwiperImage media={media} />}*/}
@@ -182,7 +183,7 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   video: {
-    height: 270,
+    height: 300,
     width: width,
   },
 });

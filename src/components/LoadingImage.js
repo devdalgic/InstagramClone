@@ -5,7 +5,7 @@ export const LoadingImage = props => {
   const [isLoading, setIsLoading] = useState(true);
   const onLoadEnd = () => {
     setIsLoading(false);
-  }
+  };
   return (
     <View style={styles.container}>
       <Image

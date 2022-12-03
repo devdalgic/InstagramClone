@@ -7,25 +7,26 @@ import {
   Image,
 } from 'react-native';
 import { width } from '../utils/constants';
+import Video from 'react-native-video';
 
 export const SearchScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [data, setData] = useState();
 
   useEffect(() => {
     fetch('/api/getSearchContent').then(res => {
       setData(JSON.parse(res._bodyText));
       setIsLoading(false);
-      console.log(res._bodyText);
     });
   }, []);
 
-  const refresh = () => {
-    setIsLoading(true);
+  const onRefresh = () => {
+    setIsRefreshing(true);
     fetch('/api/getSearchContent').then(res => {
-      setData(res);
+      setData(JSON.parse(res._bodyText));
+      setIsRefreshing(false);
     });
-    setIsLoading(false);
   };
   return (
     <View style={styles.container}>
@@ -36,12 +37,20 @@ export const SearchScreen = () => {
           numColumns={3}
           horizontal={false}
           data={data}
-          renderItem={({ item }) => (
-            <Image
-              source={{ uri: item.source }}
-              style={{ width: width / 3, height: 300 }}
-            />
-          )}
+          onRefresh={onRefresh}
+          refreshing={isRefreshing}
+          renderItem={({ item }) =>
+            item.type === 'image' ? (
+              <Image source={{ uri: item.source }} style={styles.image} />
+            ) : (
+              <Video
+                source={{ uri: item.source }}
+                style={styles.video}
+                repeat={true}
+                resizeMode={'cover'}
+              />
+            )
+          }
           keyExtractor={(item, index) => index}
         />
       )}
@@ -52,5 +61,13 @@ export const SearchScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  image: {
+    width: width / 3,
+    height: 300,
+  },
+  video: {
+    width: width / 3,
+    height: 300,
   },
 });
