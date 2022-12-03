@@ -4,6 +4,13 @@ import { getRandomPicture } from './RandomMedia';
 
 export const mockServerConfig = {
   routes() {
+    this.get(
+      '/api/login',
+      () => {
+        return new Response(200);
+      },
+      { timing: 2000 },
+    );
     this.get('/api/getPicture', () => {
       return ['Interstellar', 'Inception', 'Dunkirk'];
     });

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { AuthContext } from '../../App';
-import Icon from "react-native-vector-icons/FontAwesome5";
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export const LoginScreen = () => {
   const [username, onChangeUsername] = useState();
@@ -22,14 +22,18 @@ export const LoginScreen = () => {
   const Login = async () => {
     setIsLoading(true);
     try {
-      EncryptedStorage.setItem(
-        'user_session',
-        JSON.stringify({
-          username: username,
-          password: password,
-        }),
-      ).then(() => {
-        setIsSignedIn(true);
+      fetch('/api/login').then(res => {
+        if (res.ok) {
+          EncryptedStorage.setItem(
+            'user_session',
+            JSON.stringify({
+              username: username,
+              password: password,
+            }),
+          ).then(() => {
+            setIsSignedIn(true);
+          });
+        }
       });
     } catch (error) {
       // There was an error on the native side
@@ -62,7 +66,11 @@ export const LoginScreen = () => {
         style={styles.button}
         onPress={Login}
         disabled={isLoading}>
-        {isLoading ? <ActivityIndicator color="#ffffff" /> : <Text style={{ color: 'white' }}>Login</Text>}
+        {isLoading ? (
+          <ActivityIndicator color="white" />
+        ) : (
+          <Text style={{ color: 'white' }}>Login</Text>
+        )}
       </TouchableOpacity>
     </View>
   );
