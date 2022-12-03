@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { AuthContext } from '../../App';
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 export const LoginScreen = () => {
   const [username, onChangeUsername] = useState();
@@ -37,6 +38,11 @@ export const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.logoContainer}>
+        <Icon name="cat" color={'#841584'} size={192} style={styles.logo} />
+        <Text style={styles.info}>Case Study by Denizhan Dalgic</Text>
+        <Text style={styles.info}>Instagram Clone</Text>
+      </View>
       <Text style={styles.label}>Username</Text>
       <TextInput
         style={styles.input}
@@ -56,7 +62,7 @@ export const LoginScreen = () => {
         style={styles.button}
         onPress={Login}
         disabled={isLoading}>
-        {isLoading ? <ActivityIndicator color="#ffffff" /> : <Text>Login</Text>}
+        {isLoading ? <ActivityIndicator color="#ffffff" /> : <Text style={{ color: 'white' }}>Login</Text>}
       </TouchableOpacity>
     </View>
   );
@@ -67,6 +73,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
     marginHorizontal: 10,
+  },
+  logoContainer: {
+    alignItems: 'center',
   },
   label: {
     color: 'black',
@@ -83,5 +92,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#841584',
     paddingVertical: 10,
     marginHorizontal: 10,
+  },
+  logo: {
+    marginVertical: 10,
+  },
+  info: {
+    color: 'black',
   },
 });

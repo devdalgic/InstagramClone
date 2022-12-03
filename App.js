@@ -8,32 +8,19 @@
 
 import React, { createContext, useEffect, useState } from 'react';
 import type { Node } from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { Text } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { SplashScreen } from './src/screens/SplashScreen';
 import { LoginScreen } from './src/screens/LoginScreen';
 import { createServer } from 'miragejs';
 import { mockServerConfig } from './src/utils/MockServerConfig';
 import { FeedScreen } from './src/screens/FeedScreen';
+import { SearchScreen } from './src/screens/SearchScreen';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 if (window.server) {
+  // eslint-disable-next-line no-undef
   server.shutdown();
 }
 
@@ -44,52 +31,41 @@ const Stack = createNativeStackNavigator();
 export const AuthContext = createContext();
 
 const App: () => Node = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const [isSignedIn, setIsSignedIn] = useState(false);
 
-  useEffect(() => {
-    fetch('/api/init').then(res => {
-      if (res.ok) {
-        setIsLoading(false);
-      }
-    });
-  }, []);
-
-  if (isLoading) {
-    return <SplashScreen />;
-  }
   return (
     <NavigationContainer>
       <AuthContext.Provider value={{ isSignedIn, setIsSignedIn }}>
         <Stack.Navigator initialRouteName="Login">
           {isSignedIn ? (
-            <Stack.Screen name="Feed" component={FeedScreen} />
+            <>
+              <Stack.Screen
+                name="Feed"
+                component={FeedScreen}
+                options={({ navigation }) => ({
+                  headerRight: () => (
+                    <Icon.Button
+                      name="search"
+                      onPress={() => navigation.navigate('Search')}
+                      backgroundColor="#841584">
+                      <Text style={{ color: 'white' }}>Search</Text>
+                    </Icon.Button>
+                  ),
+                })}
+              />
+              <Stack.Screen name="Search" component={SearchScreen} />
+            </>
           ) : (
-            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen
+              name="Login"
+              component={LoginScreen}
+              options={{ headerShown: false }}
+            />
           )}
         </Stack.Navigator>
       </AuthContext.Provider>
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
