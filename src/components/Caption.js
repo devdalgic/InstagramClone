@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import PropTypes from 'prop-types';
 
 /**
  * Component to show a post's caption with poster's username.
@@ -13,6 +14,11 @@ export const Caption = ({ postedBy, caption }) => {
       </Text>
     </View>
   );
+};
+
+Caption.propTypes = {
+  postedBy: PropTypes.string.isRequired,
+  caption: PropTypes.array.isRequired,
 };
 
 const styles = StyleSheet.create({

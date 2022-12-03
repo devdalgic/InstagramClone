@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Image, View, StyleSheet } from 'react-native';
 import { LoadingIndicator } from './LoadingIndicator';
+import PropTypes from 'prop-types';
 
 /**
  * An image component based on the Image component. Shows loading indicator
@@ -17,6 +18,11 @@ export const LoadingImage = ({ source, style }) => {
       <LoadingIndicator animating={isLoading} />
     </View>
   );
+};
+
+LoadingImage.propTypes = {
+  source: PropTypes.string.isRequired,
+  style: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({

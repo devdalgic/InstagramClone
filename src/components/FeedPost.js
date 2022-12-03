@@ -8,6 +8,7 @@ import { UserHeader } from './UserHeader';
 import { LikedBy } from './LikedBy';
 import { Caption } from './Caption';
 import { LoadingVideo } from './LoadingVideo';
+import PropTypes from 'prop-types';
 
 /**
  * A post to be shown in feed screen's list. Can either be multiple images or a
@@ -99,6 +100,13 @@ export const FeedPost = ({ username: postedBy, type, caption, media = [] }) => {
       <Caption postedBy={postedBy} caption={caption} />
     </View>
   );
+};
+
+FeedPost.propTypes = {
+  username: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  caption: PropTypes.array,
+  media: PropTypes.array.isRequired,
 };
 
 const styles = StyleSheet.create({

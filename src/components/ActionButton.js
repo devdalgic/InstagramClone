@@ -1,6 +1,7 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 
 /**
  * Component showing a button with an icon to perform actions on a post. Can add
@@ -26,4 +27,16 @@ export const ActionButton = ({
       />
     </TouchableOpacity>
   );
+};
+
+ActionButton.propTypes = {
+  nameTrue: PropTypes.string.isRequired,
+  nameFalse: PropTypes.string,
+  nameCondition: PropTypes.bool,
+  colorTrue: PropTypes.string,
+  colorFalse: PropTypes.string,
+  colorCondition: PropTypes.bool,
+  onPress: PropTypes.func.isRequired,
+  style: PropTypes.object,
+  size: PropTypes.number,
 };

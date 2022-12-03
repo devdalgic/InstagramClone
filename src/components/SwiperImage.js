@@ -2,6 +2,7 @@ import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { width } from '../utils/constants';
 import { LoadingImage } from './LoadingImage';
+import PropTypes from 'prop-types';
 
 /**
  * Component to show multiple images with snapping swipe.
@@ -22,6 +23,10 @@ export const SwiperImage = ({ media }) => {
       showsHorizontalScrollIndicator={false}
     />
   );
+};
+
+SwiperImage.propTypes = {
+  media: PropTypes.array.isRequired,
 };
 
 const styles = StyleSheet.create({

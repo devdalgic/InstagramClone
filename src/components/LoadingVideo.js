@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Video from 'react-native-video';
 import { LoadingIndicator } from './LoadingIndicator';
+import PropTypes from 'prop-types';
 
 /**
  * A video component with some predefined settings applied to react-native-video
@@ -21,4 +22,9 @@ export const LoadingVideo = ({ source, style }) => {
       <LoadingIndicator animating={isLoading} />
     </>
   );
+};
+
+LoadingVideo.propTypes = {
+  source: PropTypes.string.isRequired,
+  style: PropTypes.object.isRequired,
 };
