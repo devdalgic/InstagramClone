@@ -64,21 +64,27 @@ export const Post = ({ username: postedBy, caption, media = [] }) => {
                 name={isLiked ? 'heart' : 'heart-o'}
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={toggleComment} style={styles.actionButton}>
+            <TouchableOpacity
+              onPress={toggleComment}
+              style={styles.actionButton}>
               <Icon
                 size={32}
                 color={'black'}
                 name={isCommented ? 'comment' : 'comment-o'}
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={toggleMessage} style={styles.actionButton}>
+            <TouchableOpacity
+              onPress={toggleMessage}
+              style={styles.actionButton}>
               <Icon
                 size={32}
                 color={'black'}
                 name={isMessaged ? 'paper-plane' : 'paper-plane-o'}
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={toggleBookmark} style={styles.bookmarkButton}>
+            <TouchableOpacity
+              onPress={toggleBookmark}
+              style={styles.bookmarkButton}>
               <Icon
                 size={32}
                 color={'black'}
@@ -140,6 +146,7 @@ const styles = StyleSheet.create({
   likedByContainer: {
     flex: 1,
     flexDirection: 'row',
+    marginTop: 5,
   },
   captionContainer: {
     flex: 1,

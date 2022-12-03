@@ -8,7 +8,7 @@
 
 import React, { createContext, useEffect, useState } from 'react';
 import type { Node } from 'react';
-import { Text } from 'react-native';
+import { StyleSheet, Text } from "react-native";
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -36,19 +36,29 @@ const App: () => Node = () => {
   return (
     <NavigationContainer>
       <AuthContext.Provider value={{ isSignedIn, setIsSignedIn }}>
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator
+          initialRouteName="Login"
+          screenOptions={{ headerTitleAlign: 'center' }}>
           {isSignedIn ? (
             <>
               <Stack.Screen
                 name="Feed"
                 component={FeedScreen}
                 options={({ navigation }) => ({
+                  headerLeft: () => (
+                    <Icon.Button
+                      name="sign-out"
+                      onPress={() => setIsSignedIn(false)}
+                      backgroundColor="#841584">
+                      <Text style={styles.headerButtonText}>Logout</Text>
+                    </Icon.Button>
+                  ),
                   headerRight: () => (
                     <Icon.Button
                       name="search"
                       onPress={() => navigation.navigate('Search')}
                       backgroundColor="#841584">
-                      <Text style={{ color: 'white' }}>Search</Text>
+                      <Text style={styles.headerButtonText}>Search</Text>
                     </Icon.Button>
                   ),
                 })}
@@ -67,5 +77,11 @@ const App: () => Node = () => {
     </NavigationContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  headerButtonText: {
+    color: 'white',
+  },
+});
 
 export default App;
