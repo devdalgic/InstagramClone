@@ -11,6 +11,7 @@ import Video from 'react-native-video';
 
 export const SearchScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isGettingMore, setIsGettingMore] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [data, setData] = useState();
 
@@ -28,6 +29,22 @@ export const SearchScreen = () => {
       setIsRefreshing(false);
     });
   };
+  const getMoreContent = () => {
+    setIsGettingMore(true);
+    fetch('/api/getSearchContent').then(res => {
+      setData(data.concat(JSON.parse(res._bodyText)));
+      setIsGettingMore(false);
+    });
+  };
+  const footerLoading = () => {
+    return (
+      <ActivityIndicator
+        animating={isGettingMore}
+        size={'large'}
+        color={'#841584'}
+      />
+    );
+  };
   return (
     <View style={styles.container}>
       {isLoading ? (
@@ -39,6 +56,8 @@ export const SearchScreen = () => {
           data={data}
           onRefresh={onRefresh}
           refreshing={isRefreshing}
+          onEndReached={getMoreContent}
+          ListFooterComponent={footerLoading}
           renderItem={({ item }) =>
             item.type === 'image' ? (
               <Image source={{ uri: item.source }} style={styles.image} />
@@ -51,7 +70,7 @@ export const SearchScreen = () => {
               />
             )
           }
-          keyExtractor={(item, index) => index}
+          keyExtractor={item => item.id}
         />
       )}
     </View>

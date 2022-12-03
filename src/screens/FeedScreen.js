@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  StyleSheet,
-  View,
-  RefreshControl,
-} from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 import { Post } from '../components/Post';
 
 export const FeedScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isGettingMore, setIsGettingMore] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [data, setData] = useState();
 
@@ -27,6 +22,22 @@ export const FeedScreen = () => {
       setIsRefreshing(false);
     });
   };
+  const getMoreContent = () => {
+    setIsGettingMore(true);
+    fetch('/api/getFeedContent').then(res => {
+      setData(data.concat(JSON.parse(res._bodyText)));
+      setIsGettingMore(false);
+    });
+  };
+  const footerLoading = () => {
+    return (
+      <ActivityIndicator
+        animating={isGettingMore}
+        size={'large'}
+        color={'#841584'}
+      />
+    );
+  };
   return (
     <View style={styles.container}>
       {isLoading ? (
@@ -35,9 +46,11 @@ export const FeedScreen = () => {
         <FlatList
           data={data}
           renderItem={({ item }) => <Post {...item} />}
-          keyExtractor={(item, index) => index}
+          keyExtractor={item => item.id}
           onRefresh={onRefresh}
           refreshing={isRefreshing}
+          onEndReached={getMoreContent}
+          ListFooterComponent={footerLoading}
         />
       )}
     </View>
