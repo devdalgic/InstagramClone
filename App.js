@@ -6,9 +6,9 @@
  * @flow strict-local
  */
 
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import type { Node } from 'react';
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

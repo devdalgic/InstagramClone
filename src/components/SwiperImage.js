@@ -1,18 +1,16 @@
 import React from 'react';
-import { Image, FlatList, ImageBackground } from 'react-native';
-import { width, height } from '../utils/constants';
+import { FlatList, StyleSheet } from 'react-native';
+import { width } from '../utils/constants';
 import { LoadingImage } from './LoadingImage';
 
-export const SwiperImage = props => {
-  // console.log(media.media[0]);
+export const SwiperImage = ({ media }) => {
   const renderItem = item => {
-    // return <Image source={{ uri: item }} style={{ width: 500, height: 300 }} />;
-    return <LoadingImage source={item} />;
+    return <LoadingImage source={item} style={styles.image} />;
   };
 
   return (
     <FlatList
-      data={props.media}
+      data={media}
       renderItem={({ item }) => renderItem(item)}
       horizontal={true}
       decelerationRate={'normal'}
@@ -22,3 +20,10 @@ export const SwiperImage = props => {
     />
   );
 };
+
+const styles = StyleSheet.create({
+  image: {
+    width: 500,
+    height: 300,
+  },
+});

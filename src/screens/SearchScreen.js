@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  StyleSheet,
-  View,
-  Image,
-} from 'react-native';
-import { width } from '../utils/constants';
-import Video from 'react-native-video';
+import { FlatList, StyleSheet, View } from 'react-native';
+import { LoadingIndicator } from '../components/LoadingIndicator';
+import { SearchPost } from '../components/SearchPost';
 
+/**
+ * Shows the Discover page with infinite scrolling
+ */
 export const SearchScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isGettingMore, setIsGettingMore] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [data, setData] = useState();
 
+  // Get data for the first time
   useEffect(() => {
     fetch('/api/getSearchContent').then(res => {
       setData(JSON.parse(res._bodyText));
@@ -22,6 +20,7 @@ export const SearchScreen = () => {
     });
   }, []);
 
+  // Get new data on refresh
   const onRefresh = () => {
     setIsRefreshing(true);
     fetch('/api/getSearchContent').then(res => {
@@ -29,6 +28,7 @@ export const SearchScreen = () => {
       setIsRefreshing(false);
     });
   };
+  // Get more data when reached the end of the list (infinite scrolling)
   const getMoreContent = () => {
     setIsGettingMore(true);
     fetch('/api/getSearchContent').then(res => {
@@ -36,19 +36,10 @@ export const SearchScreen = () => {
       setIsGettingMore(false);
     });
   };
-  const footerLoading = () => {
-    return (
-      <ActivityIndicator
-        animating={isGettingMore}
-        size={'large'}
-        color={'#841584'}
-      />
-    );
-  };
   return (
     <View style={styles.container}>
       {isLoading ? (
-        <ActivityIndicator color={'#841584'} />
+        <LoadingIndicator />
       ) : (
         <FlatList
           numColumns={3}
@@ -57,19 +48,8 @@ export const SearchScreen = () => {
           onRefresh={onRefresh}
           refreshing={isRefreshing}
           onEndReached={getMoreContent}
-          ListFooterComponent={footerLoading}
-          renderItem={({ item }) =>
-            item.type === 'image' ? (
-              <Image source={{ uri: item.source }} style={styles.image} />
-            ) : (
-              <Video
-                source={{ uri: item.source }}
-                style={styles.video}
-                repeat={true}
-                resizeMode={'cover'}
-              />
-            )
-          }
+          ListFooterComponent={LoadingIndicator(isGettingMore)}
+          renderItem={({ item }) => <SearchPost item={item} />}
           keyExtractor={item => item.id}
         />
       )}
@@ -80,13 +60,5 @@ export const SearchScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  image: {
-    width: width / 3,
-    height: 300,
-  },
-  video: {
-    width: width / 3,
-    height: 300,
   },
 });

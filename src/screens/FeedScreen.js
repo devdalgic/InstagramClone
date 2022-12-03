@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
-import { Post } from '../components/Post';
+import { FlatList, StyleSheet, View } from 'react-native';
+import { FeedPost } from '../components/FeedPost';
+import { LoadingIndicator } from '../components/LoadingIndicator';
 
 export const FeedScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,28 +30,19 @@ export const FeedScreen = () => {
       setIsGettingMore(false);
     });
   };
-  const footerLoading = () => {
-    return (
-      <ActivityIndicator
-        animating={isGettingMore}
-        size={'large'}
-        color={'#841584'}
-      />
-    );
-  };
   return (
     <View style={styles.container}>
       {isLoading ? (
-        <ActivityIndicator color={'#841584'} size={'large'} />
+        <LoadingIndicator />
       ) : (
         <FlatList
           data={data}
-          renderItem={({ item }) => <Post {...item} />}
+          renderItem={({ item }) => <FeedPost {...item} />}
           keyExtractor={item => item.id}
           onRefresh={onRefresh}
           refreshing={isRefreshing}
           onEndReached={getMoreContent}
-          ListFooterComponent={footerLoading}
+          ListFooterComponent={LoadingIndicator(isGettingMore)}
         />
       )}
     </View>
