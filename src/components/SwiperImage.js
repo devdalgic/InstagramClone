@@ -15,9 +15,9 @@ export const SwiperImage = props => {
       data={props.media}
       renderItem={({ item }) => renderItem(item)}
       horizontal={true}
-      decelerationRate={0}
-      snapToInterval={width - 500}
-      snapToAlignment={'center'}
+      decelerationRate={'normal'}
+      snapToInterval={width}
+      snapToAlignment={'start'}
       showsHorizontalScrollIndicator={false}
     />
   );

@@ -9,7 +9,7 @@ export const mockServerConfig = {
       () => {
         return new Response(200);
       },
-      { timing: 2000 },
+      { timing: 1000 },
     );
     this.get('/api/getPicture', () => {
       return ['Interstellar', 'Inception', 'Dunkirk'];
