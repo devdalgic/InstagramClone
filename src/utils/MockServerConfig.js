@@ -26,30 +26,37 @@ export const mockServerConfig = {
         {
           id: 0,
           username: username(),
+          type: 'image',
           caption: loremIpsum({ avgSentencesPerParagraph: 1 }),
           media: [getRandomPicture(), getRandomPicture()],
         },
         {
           id: 1,
           username: username(),
+          type: 'video',
           caption: loremIpsum({ avgSentencesPerParagraph: 1 }),
-          media: [getRandomPicture(), getRandomPicture()],
+          media: [
+            'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+          ],
         },
         {
           id: 2,
           username: username(),
+          type: 'image',
           caption: loremIpsum({ avgSentencesPerParagraph: 1 }),
           media: [getRandomPicture(), getRandomPicture()],
         },
         {
           id: 3,
           username: username(),
+          type: 'image',
           caption: loremIpsum({ avgSentencesPerParagraph: 1 }),
           media: [getRandomPicture(), getRandomPicture()],
         },
         {
           id: 4,
           username: username(),
+          type: 'image',
           caption: loremIpsum({ avgSentencesPerParagraph: 1 }),
           media: [getRandomPicture(), getRandomPicture()],
         },

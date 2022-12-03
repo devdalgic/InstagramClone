@@ -3,8 +3,10 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { SwiperImage } from './SwiperImage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { username } from 'react-lorem-ipsum';
+import Video from 'react-native-video';
+import { width } from '../utils/constants';
 
-export const Post = ({ username: postedBy, caption, media = [] }) => {
+export const Post = ({ username: postedBy, type, caption, media = [] }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likedBy, setLikedBy] = useState('');
   const [isCommented, setIsCommented] = useState(false);
@@ -12,7 +14,6 @@ export const Post = ({ username: postedBy, caption, media = [] }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   const [tapCount, setTapCount] = useState(0);
-
   useEffect(() => {
     setLikedBy(username());
   }, []);
@@ -54,7 +55,16 @@ export const Post = ({ username: postedBy, caption, media = [] }) => {
           />
           <Text style={styles.usernameText}>{postedBy}</Text>
         </View>
-        {media.length === 1 ? <View /> : <SwiperImage media={media} />}
+        {type === 'image' ? (
+          <SwiperImage media={media} />
+        ) : (
+          <Video
+            source={{ uri: media[0] }}
+            style={styles.video}
+            repeat={true}
+          />
+        )}
+        {/*{media.length === 1 ? <View /> : <SwiperImage media={media} />}*/}
         <View style={styles.infoContainer}>
           <View style={styles.actionContainer}>
             <TouchableOpacity onPress={doubleTap} style={styles.actionButton}>
@@ -99,8 +109,10 @@ export const Post = ({ username: postedBy, caption, media = [] }) => {
           </View>
         </View>
         <View style={styles.captionContainer}>
-          <Text style={styles.captionUsernameText}> {postedBy} </Text>
-          <Text style={styles.captionText}> {caption} </Text>
+          <Text style={styles.captionText}>
+            <Text style={styles.captionUsernameText}> {postedBy} </Text>
+            {caption}{' '}
+          </Text>
         </View>
       </View>
     </View>
@@ -164,10 +176,13 @@ const styles = StyleSheet.create({
   },
   captionUsernameText: {
     fontWeight: 'bold',
-    color: 'black',
   },
   captionText: {
     color: 'black',
     flexShrink: 1,
+  },
+  video: {
+    height: 270,
+    width: width,
   },
 });
