@@ -3,6 +3,9 @@ import { FlatList, StyleSheet } from 'react-native';
 import { width } from '../utils/constants';
 import { LoadingImage } from './LoadingImage';
 
+/**
+ * Component to show multiple images with snapping swipe.
+ */
 export const SwiperImage = ({ media }) => {
   const renderItem = item => {
     return <LoadingImage source={item} style={styles.image} />;

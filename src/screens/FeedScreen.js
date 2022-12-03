@@ -3,29 +3,38 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import { FeedPost } from '../components/FeedPost';
 import { LoadingIndicator } from '../components/LoadingIndicator';
 
+/**
+ * Shows posts as a list with details like the poster's username, actions and
+ * like count. Has infinite scrolling. Shows indicator while loading.
+ */
 export const FeedScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isGettingMore, setIsGettingMore] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [data, setData] = useState();
 
+  const apiPath = '/api/getFeedContent';
+
+  // Get data for the first time.
   useEffect(() => {
-    fetch('/api/getFeedContent').then(res => {
+    fetch(apiPath).then(res => {
       setData(JSON.parse(res._bodyText));
       setIsLoading(false);
     });
   }, []);
 
+  // Get new data on refresh.
   const onRefresh = () => {
     setIsRefreshing(true);
-    fetch('/api/getFeedContent').then(res => {
+    fetch(apiPath).then(res => {
       setData(JSON.parse(res._bodyText));
       setIsRefreshing(false);
     });
   };
+  // Get more data when reached the end of the list (infinite scrolling).
   const getMoreContent = () => {
     setIsGettingMore(true);
-    fetch('/api/getFeedContent').then(res => {
+    fetch(apiPath).then(res => {
       setData(data.concat(JSON.parse(res._bodyText)));
       setIsGettingMore(false);
     });

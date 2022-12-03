@@ -1,11 +1,18 @@
+/**
+ * Functions to return random media to complement mock API.
+ */
+
+// Get a random picture URL selected from a predefined array.
 export const getRandomPicture = () => {
   return randomPicture[Math.floor(Math.random() * randomPicture.length)];
 };
 
+// Get a random video URL selected from a predefined array.
 export const getRandomVideo = () => {
   return randomVideo[Math.floor(Math.random() * randomVideo.length)];
 };
 
+// All pictures are larger than 10 MB
 const randomPicture = [
   'https://images.pexels.com/photos/1540258/pexels-photo-1540258.jpeg',
   'https://images.pexels.com/photos/5805867/pexels-photo-5805867.jpeg',

@@ -4,7 +4,7 @@ import { LoadingIndicator } from '../components/LoadingIndicator';
 import { SearchPost } from '../components/SearchPost';
 
 /**
- * Shows the Discover page with infinite scrolling
+ * Shows posts as a grid with infinite scrolling. Shows indicator while loading.
  */
 export const SearchScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,26 +12,28 @@ export const SearchScreen = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [data, setData] = useState();
 
-  // Get data for the first time
+  const apiPath = '/api/getSearchContent';
+
+  // Get data for the first time.
   useEffect(() => {
-    fetch('/api/getSearchContent').then(res => {
+    fetch(apiPath).then(res => {
       setData(JSON.parse(res._bodyText));
       setIsLoading(false);
     });
   }, []);
 
-  // Get new data on refresh
+  // Get new data on refresh.
   const onRefresh = () => {
     setIsRefreshing(true);
-    fetch('/api/getSearchContent').then(res => {
+    fetch(apiPath).then(res => {
       setData(JSON.parse(res._bodyText));
       setIsRefreshing(false);
     });
   };
-  // Get more data when reached the end of the list (infinite scrolling)
+  // Get more data when reached the end of the list (infinite scrolling).
   const getMoreContent = () => {
     setIsGettingMore(true);
-    fetch('/api/getSearchContent').then(res => {
+    fetch(apiPath).then(res => {
       setData(data.concat(JSON.parse(res._bodyText)));
       setIsGettingMore(false);
     });

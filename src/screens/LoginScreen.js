@@ -11,14 +11,20 @@ import { AuthContext } from '../../App';
 import { LoadingIndicator } from '../components/LoadingIndicator';
 import { Logo } from '../components/Logo';
 
+/**
+ * A login screen where the user can enter any input, and they will be logged in.
+ * Their information will be saved to Encrypted Storage.
+ */
 export const LoginScreen = () => {
   const [username, onChangeUsername] = useState();
   const [password, onChangePassword] = useState();
 
   const [isLoading, setIsLoading] = useState(false);
 
+  // Need to use the same context from the parent to communicate.
   const { isSignedIn, setIsSignedIn } = useContext(AuthContext);
 
+  // Fetch login from API and Save login information.
   const Login = async () => {
     setIsLoading(true);
     try {

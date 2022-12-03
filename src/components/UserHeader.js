@@ -2,6 +2,9 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, Text, View } from 'react-native';
 
+/**
+ * Component to show a post's poster name and avatar.
+ */
 export const UserHeader = ({ username }) => {
   return (
     <View style={styles.container}>

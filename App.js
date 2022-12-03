@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React, { createContext, useState } from 'react';
 import type { Node } from 'react';
 import { StyleSheet, Text } from 'react-native';
@@ -19,17 +11,25 @@ import { FeedScreen } from './src/screens/FeedScreen';
 import { SearchScreen } from './src/screens/SearchScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+// Check for server instance to prevent duplicates and shut it down.
 if (window.server) {
   // eslint-disable-next-line no-undef
   server.shutdown();
 }
 
+// Create new mock server instance.
 window.server = createServer(mockServerConfig);
 
 const Stack = createNativeStackNavigator();
 
+// Create context to let child communicate with its parent. Provided to children
+// with AuthContext.Provider.
 export const AuthContext = createContext();
 
+/**
+ * App component containing AuthContext. Shows login screen or feed and search
+ * screens based on it.
+ */
 const App: () => Node = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
 

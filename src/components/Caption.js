@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+/**
+ * Component to show a post's caption with poster's username.
+ */
 export const Caption = ({ postedBy, caption }) => {
   return (
     <View style={styles.captionContainer}>

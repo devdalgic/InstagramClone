@@ -2,6 +2,9 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { StyleSheet, Text, View } from 'react-native';
 
+/**
+ * Shows logo of the app and some credits.
+ */
 export const Logo = () => {
   return (
     <View style={styles.logoContainer}>

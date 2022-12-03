@@ -9,14 +9,19 @@ import { LikedBy } from './LikedBy';
 import { Caption } from './Caption';
 import { LoadingVideo } from './LoadingVideo';
 
+/**
+ * A post to be shown in feed screen's list. Can either be multiple images or a
+ * video.
+ */
 export const FeedPost = ({ username: postedBy, type, caption, media = [] }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likedBy, setLikedBy] = useState('');
   const [isCommented, setIsCommented] = useState(false);
   const [isMessaged, setIsMessaged] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
-
   const [tapCount, setTapCount] = useState(0);
+
+  // Create random username.
   useEffect(() => {
     setLikedBy(username());
   }, []);
@@ -31,16 +36,19 @@ export const FeedPost = ({ username: postedBy, type, caption, media = [] }) => {
       }, 300);
     }
   };
-
+  // Toggle like on the post.
   const doubleTap = () => {
     setIsLiked(!isLiked);
   };
+  // Toggle comment button.
   const toggleComment = () => {
     setIsCommented(!isCommented);
   };
+  // Toggle message button.
   const toggleMessage = () => {
     setIsMessaged(!isMessaged);
   };
+  // Toggle bookmark button.
   const toggleBookmark = () => {
     setIsBookmarked(!isBookmarked);
   };

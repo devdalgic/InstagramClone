@@ -3,8 +3,15 @@ import { loremIpsum, username } from 'react-lorem-ipsum';
 import { getRandomPicture, getRandomVideo } from './RandomMedia';
 import uuid from 'react-native-uuid';
 
+/**
+ * Media types to choose from. Image has duplicate entry to increase its
+ * chances.
+ */
 const mediaTypes = ['image', 'image', 'video'];
 
+/**
+ * Mock API to simulate real API calls with a default delay of 400 ms.
+ */
 export const mockServerConfig = {
   routes() {
     this.get(

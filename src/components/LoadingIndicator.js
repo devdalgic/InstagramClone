@@ -1,6 +1,9 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet } from 'react-native';
 
+/**
+ * An Activity Indicator with some predefined values
+ */
 export const LoadingIndicator = ({ animating = true, color = '#841584' }) => {
   return (
     <ActivityIndicator
