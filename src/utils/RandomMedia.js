@@ -1,14 +1,15 @@
+// @flow
 /**
  * Functions to return random media to complement mock API.
  */
 
 // Get a random picture URL selected from a predefined array.
-export const getRandomPicture = () => {
+export const getRandomPicture = (): string => {
   return randomPicture[Math.floor(Math.random() * randomPicture.length)];
 };
 
 // Get a random video URL selected from a predefined array.
-export const getRandomVideo = () => {
+export const getRandomVideo = (): string => {
   return randomVideo[Math.floor(Math.random() * randomVideo.length)];
 };
 

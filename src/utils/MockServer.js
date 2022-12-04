@@ -1,9 +1,10 @@
+// @flow
 import { createServer, Response } from 'miragejs';
 import { loremIpsum, username } from 'react-lorem-ipsum';
 import { getRandomPicture, getRandomVideo } from './RandomMedia';
 import uuid from 'react-native-uuid';
 
-export const createMockServer = () => {
+export const createMockServer = (): void => {
   // Check for server instance to prevent duplicates and shut it down.
   if (window.server) {
     // eslint-disable-next-line no-undef
