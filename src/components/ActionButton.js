@@ -19,7 +19,10 @@ export const ActionButton = ({
   size = 32,
 }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={style}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={style}
+      hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
       <Icon
         size={size}
         color={colorCondition ? colorTrue : colorFalse}

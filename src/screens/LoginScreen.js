@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import {
   Text,
   View,
@@ -60,7 +60,8 @@ export const LoginScreen = () => {
       }
     }
   };
-
+  // Need ref to change focus from username input to password input
+  const passwordInput = useRef();
   return (
     <View style={styles.container}>
       <Logo />
@@ -70,19 +71,33 @@ export const LoginScreen = () => {
         onChangeText={onChangeUsername}
         value={username}
         editable={!isLoading}
+        keyboardType="email-address"
+        returnKeyType="next"
+        onSubmitEditing={() => {
+          passwordInput.current.focus();
+        }}
+        blurOnSubmit={false}
+        onFocus={() => setUsernameInputStyle(styles.activeInput)}
+        onBlur={() => setUsernameInputStyle(styles.input)}
       />
       <Text style={styles.label}>Password</Text>
       <TextInput
+        ref={passwordInput}
         style={passwordInputStyle}
         onChangeText={onChangePassword}
         value={password}
         editable={!isLoading}
+        keyboardType="default"
         secureTextEntry
+        onSubmitEditing={Login}
+        onFocus={() => setPasswordInputStyle(styles.activeInput)}
+        onBlur={() => setPasswordInputStyle(styles.input)}
       />
       <TouchableOpacity
         style={styles.button}
         onPress={Login}
-        disabled={isLoading}>
+        disabled={isLoading}
+        hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
         {isLoading ? (
           <LoadingIndicator color={'white'} />
         ) : (
@@ -112,6 +127,15 @@ const styles = StyleSheet.create({
     color: 'black',
     borderRadius: 5,
   },
+  activeInput: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    color: 'black',
+    borderRadius: 5,
+    borderColor: '#841584',
+  },
   wrongInput: {
     height: 40,
     margin: 12,
@@ -126,6 +150,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#841584',
     paddingVertical: 10,
     marginHorizontal: 10,
+    marginTop: 20,
     borderRadius: 5,
   },
 });
