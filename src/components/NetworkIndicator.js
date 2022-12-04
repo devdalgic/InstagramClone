@@ -3,15 +3,20 @@ import NetInfo from '@react-native-community/netinfo';
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+/**
+ * Subscribes to network events and shows warning when there is no connection.
+ */
 export const NetworkIndicator = () => {
   const [isConnected, setIsConnected] = useState(true);
 
+  // Subscribe to network events provided by NetInfo module
   useEffect(() => {
     NetInfo.addEventListener(state => {
       setIsConnected(state.isConnected);
     });
   }, []);
 
+  // Show only when there is no connection
   return isConnected ? (
     <View />
   ) : (
