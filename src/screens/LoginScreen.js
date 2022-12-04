@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
   Text,
   View,
@@ -6,10 +6,10 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import EncryptedStorage from 'react-native-encrypted-storage';
 import { AuthContext } from '../../App';
 import { LoadingIndicator } from '../components/LoadingIndicator';
 import { Logo } from '../components/Logo';
+import { checkLoggedIn, loginUser } from '../utils/UserAuth';
 
 /**
  * A login screen where the user can enter any input, and they will be logged in.
@@ -26,14 +26,18 @@ export const LoginScreen = () => {
   // Need to use the same context from the parent to communicate.
   const { isSignedIn, setIsSignedIn } = useContext(AuthContext);
 
+  useEffect(() => {
+    checkLoggedIn().then(r => setIsSignedIn(r));
+  }, [setIsSignedIn]);
+
   // Fetch login from API and Save login information.
   const Login = async () => {
     let filledCorrectly = true;
-    if (username === '') {
+    if (username.trim() === '') {
       setUsernameInputStyle(styles.wrongInput);
       filledCorrectly = false;
     }
-    if (password === '') {
+    if (password.trim() === '') {
       setPasswordInputStyle(styles.wrongInput);
       filledCorrectly = false;
     }
@@ -41,23 +45,24 @@ export const LoginScreen = () => {
       setUsernameInputStyle(styles.input);
       setPasswordInputStyle(styles.input);
       setIsLoading(true);
-      try {
-        fetch('/api/login').then(res => {
-          if (res.ok) {
-            EncryptedStorage.setItem(
-              'user_session',
-              JSON.stringify({
-                username: username,
-                password: password,
-              }),
-            ).then(() => {
-              setIsSignedIn(true);
-            });
-          }
-        });
-      } catch (error) {
-        // There was an error on the native side
-      }
+      // try {
+      //   fetch('/api/login').then(res => {
+      //     if (res.ok) {
+      //       EncryptedStorage.setItem(
+      //         'user_session',
+      //         JSON.stringify({
+      //           username: username,
+      //           password: password,
+      //         }),
+      //       ).then(() => {
+      //         setIsSignedIn(true);
+      //       });
+      //     }
+      //   });
+      // } catch (error) {
+      //   // There was an error on the native side
+      // }
+      loginUser(username, password).then(r => setIsSignedIn(r));
     }
   };
   // Need ref to change focus from username input to password input

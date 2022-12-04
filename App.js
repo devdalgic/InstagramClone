@@ -6,20 +6,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { LoginScreen } from './src/screens/LoginScreen';
 import { createServer } from 'miragejs';
-import { mockServerConfig } from './src/utils/MockServerConfig';
+import { createMockServer } from './src/utils/MockServer';
 import { FeedScreen } from './src/screens/FeedScreen';
 import { SearchScreen } from './src/screens/SearchScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { NetworkIndicator } from './src/components/NetworkIndicator';
+import { logoutUser } from './src/utils/UserAuth';
 
-// Check for server instance to prevent duplicates and shut it down.
-if (window.server) {
-  // eslint-disable-next-line no-undef
-  server.shutdown();
-}
-
-// Create new mock server instance.
-window.server = createServer(mockServerConfig);
+createMockServer();
 
 const Stack = createNativeStackNavigator();
 
@@ -51,7 +45,9 @@ const App: () => Node = () => {
                     headerLeft: () => (
                       <Icon.Button
                         name="sign-out"
-                        onPress={() => setIsSignedIn(false)}
+                        onPress={() => {
+                          logoutUser().then(() => setIsSignedIn(false));
+                        }}
                         backgroundColor="#841584">
                         <Text style={styles.headerButtonText}>Logout</Text>
                       </Icon.Button>
