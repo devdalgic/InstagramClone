@@ -5,6 +5,10 @@ import {
 } from '../src/utils/UserAuth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+/**
+ * Tests related to authentication.
+ */
+
 test('Login state saved correctly', async () => {
   await saveUserCredentials('test', 'test');
   const isLoggedIn = await checkLoggedIn();

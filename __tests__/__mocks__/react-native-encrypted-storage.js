@@ -1,4 +1,6 @@
-// Custom mock for react-native-encrypted-storage
+/**
+ * Custom mock for react-native-encrypted-storage
+ */
 const RNEncryptedStorage = {
   setItem: jest.fn(() => Promise.resolve()),
   getItem: jest.fn(() => Promise.resolve('{ "foo": 1 }')),

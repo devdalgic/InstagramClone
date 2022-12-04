@@ -10,6 +10,10 @@ import { Logo } from '../src/components/Logo';
 import { SwiperImage } from '../src/components/SwiperImage';
 import { UserHeader } from '../src/components/UserHeader';
 
+/**
+ * Snapshot tests to test component trees.
+ */
+
 test('Caption renders correctly', () => {
   const tree = renderer
     .create(<Caption postedBy={'test'} caption={['test']} />)

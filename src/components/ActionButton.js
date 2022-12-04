@@ -22,11 +22,13 @@ export const ActionButton = ({
     <TouchableOpacity
       onPress={onPress}
       style={style}
+      testID="actionButton"
       hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
       <Icon
         size={size}
         color={colorCondition ? colorTrue : colorFalse}
         name={nameCondition ? nameTrue : nameFalse}
+        testID="actionButtonIcon"
       />
     </TouchableOpacity>
   );

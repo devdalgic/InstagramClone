@@ -4,6 +4,10 @@ import { loremIpsum, username } from 'react-lorem-ipsum';
 import { getRandomPicture, getRandomVideo } from './RandomMedia';
 import uuid from 'react-native-uuid';
 
+/**
+ * Create mock server after checking if there is already an instance of one.
+ * If there is, shut down and create new one.
+ */
 export const createMockServer = (): void => {
   // Check for server instance to prevent duplicates and shut it down.
   if (window.server) {
