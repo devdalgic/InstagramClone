@@ -9,7 +9,7 @@ export const Caption = ({ postedBy, caption }) => {
   return (
     <View style={styles.captionContainer}>
       <Text style={styles.captionText}>
-        <Text style={styles.captionUsernameText}> {postedBy} </Text>
+        <Text style={styles.captionUsernameText}>{postedBy} </Text>
         {caption}{' '}
       </Text>
     </View>
@@ -26,12 +26,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     marginStart: 10,
+    marginTop: 5,
   },
   captionUsernameText: {
     fontWeight: 'bold',
   },
   captionText: {
     color: 'black',
-    flexShrink: 1,
   },
 });

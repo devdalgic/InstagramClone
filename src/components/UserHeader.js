@@ -25,15 +25,16 @@ UserHeader.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  avatarImage: {
-    marginRight: 10,
-    borderRadius: 20,
-  },
   container: {
     flex: 1,
     flexDirection: 'row',
     marginBottom: 10,
     marginStart: 10,
+    alignItems: 'center',
+  },
+  avatarImage: {
+    marginRight: 10,
+    borderRadius: 20,
   },
   usernameText: {
     color: 'black',

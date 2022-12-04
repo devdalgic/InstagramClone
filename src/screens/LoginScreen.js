@@ -16,8 +16,10 @@ import { Logo } from '../components/Logo';
  * Their information will be saved to Encrypted Storage.
  */
 export const LoginScreen = () => {
-  const [username, onChangeUsername] = useState();
-  const [password, onChangePassword] = useState();
+  const [username, onChangeUsername] = useState('');
+  const [usernameInputStyle, setUsernameInputStyle] = useState(styles.input);
+  const [password, onChangePassword] = useState('');
+  const [passwordInputStyle, setPasswordInputStyle] = useState(styles.input);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -26,23 +28,36 @@ export const LoginScreen = () => {
 
   // Fetch login from API and Save login information.
   const Login = async () => {
-    setIsLoading(true);
-    try {
-      fetch('/api/login').then(res => {
-        if (res.ok) {
-          EncryptedStorage.setItem(
-            'user_session',
-            JSON.stringify({
-              username: username,
-              password: password,
-            }),
-          ).then(() => {
-            setIsSignedIn(true);
-          });
-        }
-      });
-    } catch (error) {
-      // There was an error on the native side
+    let filledCorrectly = true;
+    if (username === '') {
+      setUsernameInputStyle(styles.wrongInput);
+      filledCorrectly = false;
+    }
+    if (password === '') {
+      setPasswordInputStyle(styles.wrongInput);
+      filledCorrectly = false;
+    }
+    if (filledCorrectly) {
+      setUsernameInputStyle(styles.input);
+      setPasswordInputStyle(styles.input);
+      setIsLoading(true);
+      try {
+        fetch('/api/login').then(res => {
+          if (res.ok) {
+            EncryptedStorage.setItem(
+              'user_session',
+              JSON.stringify({
+                username: username,
+                password: password,
+              }),
+            ).then(() => {
+              setIsSignedIn(true);
+            });
+          }
+        });
+      } catch (error) {
+        // There was an error on the native side
+      }
     }
   };
 
@@ -51,14 +66,14 @@ export const LoginScreen = () => {
       <Logo />
       <Text style={styles.label}>Username</Text>
       <TextInput
-        style={styles.input}
+        style={usernameInputStyle}
         onChangeText={onChangeUsername}
         value={username}
         editable={!isLoading}
       />
       <Text style={styles.label}>Password</Text>
       <TextInput
-        style={styles.input}
+        style={passwordInputStyle}
         onChangeText={onChangePassword}
         value={password}
         editable={!isLoading}
@@ -83,6 +98,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
     marginHorizontal: 10,
+    paddingBottom: 30,
   },
   label: {
     color: 'black',
@@ -94,11 +110,22 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     color: 'black',
+    borderRadius: 5,
+  },
+  wrongInput: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    color: 'black',
+    borderRadius: 5,
+    borderColor: 'red',
   },
   button: {
     alignItems: 'center',
     backgroundColor: '#841584',
     paddingVertical: 10,
     marginHorizontal: 10,
+    borderRadius: 5,
   },
 });

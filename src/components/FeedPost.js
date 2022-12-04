@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
-    marginVertical: 10,
+    marginTop: 10,
     marginStart: 10,
   },
   actionContainer: {
@@ -132,28 +132,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 20,
   },
-  likedByContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    marginTop: 5,
-  },
-  captionContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    marginStart: 10,
-  },
   button: {
     alignItems: 'center',
     backgroundColor: '#841584',
     paddingVertical: 10,
     marginHorizontal: 10,
-  },
-  captionUsernameText: {
-    fontWeight: 'bold',
-  },
-  captionText: {
-    color: 'black',
-    flexShrink: 1,
   },
   video: {
     height: 300,

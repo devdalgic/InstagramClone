@@ -25,13 +25,12 @@ const styles = StyleSheet.create({
   likedByContainer: {
     flex: 1,
     flexDirection: 'row',
-    marginTop: 5,
+    marginTop: 10,
   },
   usernameText: {
     fontWeight: 'bold',
   },
   text: {
     color: 'black',
-    flexShrink: 1,
   },
 });
