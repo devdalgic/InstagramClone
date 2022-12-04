@@ -1,0 +1,601 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Caption renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "row",
+      "marginStart": 10,
+      "marginTop": 5,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "black",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "fontWeight": "bold",
+        }
+      }
+    >
+      test
+       
+    </Text>
+    test
+     
+  </Text>
+</View>
+`;
+
+exports[`FeedPost renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "marginVertical": 15,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "marginBottom": 10,
+        "marginStart": 10,
+      }
+    }
+  >
+    <MockedFontAwesome
+      color="#841584"
+      name="user-circle"
+      size={32}
+      style={
+        Object {
+          "borderRadius": 20,
+          "marginRight": 10,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "black",
+        }
+      }
+    >
+      test
+    </Text>
+  </View>
+  <Video
+    onBuffer={[Function]}
+    posterResizeMode="cover"
+    repeat={true}
+    resizeMode="cover"
+    source={
+      Object {
+        "uri": "test",
+      }
+    }
+    style={
+      Object {
+        "height": 300,
+        "width": 750,
+      }
+    }
+  />
+  <ActivityIndicator
+    animating={true}
+    color="#841584"
+    size="large"
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "marginStart": 10,
+        "marginTop": 10,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 20,
+            "left": 20,
+            "right": 20,
+            "top": 20,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginHorizontal": 10,
+            "opacity": 1,
+          }
+        }
+      >
+        <MockedFontAwesome
+          color="black"
+          name="heart-o"
+          size={32}
+        />
+      </View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 20,
+            "left": 20,
+            "right": 20,
+            "top": 20,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginHorizontal": 10,
+            "opacity": 1,
+          }
+        }
+      >
+        <MockedFontAwesome
+          color="black"
+          name="comment-o"
+          size={32}
+        />
+      </View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 20,
+            "left": 20,
+            "right": 20,
+            "top": 20,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "marginHorizontal": 10,
+            "opacity": 1,
+          }
+        }
+      >
+        <MockedFontAwesome
+          color="black"
+          name="paper-plane-o"
+          size={32}
+        />
+      </View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        hitSlop={
+          Object {
+            "bottom": 20,
+            "left": 20,
+            "right": 20,
+            "top": 20,
+          }
+        }
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+            "position": "absolute",
+            "right": 20,
+          }
+        }
+      >
+        <MockedFontAwesome
+          color="black"
+          name="bookmark-o"
+          size={32}
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "row",
+          "marginTop": 10,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "black",
+          }
+        }
+      >
+        Liked by
+        <Text
+          style={
+            Object {
+              "fontWeight": "bold",
+            }
+          }
+        >
+           
+           
+        </Text>
+        and others
+         
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "row",
+        "marginStart": 10,
+        "marginTop": 5,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "black",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        test
+         
+      </Text>
+      test
+       
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`LikedBy renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "row",
+      "marginTop": 10,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "black",
+      }
+    }
+  >
+    Liked by
+    <Text
+      style={
+        Object {
+          "fontWeight": "bold",
+        }
+      }
+    >
+       
+      test
+       
+    </Text>
+    and others
+     
+  </Text>
+</View>
+`;
+
+exports[`LoadingImage renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    onLoadEnd={[Function]}
+    source={
+      Object {
+        "uri": "test",
+      }
+    }
+    style={
+      Object {
+        "test": "test",
+      }
+    }
+  />
+  <ActivityIndicator
+    animating={true}
+    color="#841584"
+    size="large"
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`LoadingIndicator renders correctly 1`] = `
+<ActivityIndicator
+  animating={true}
+  color="#841584"
+  size="large"
+  style={
+    Object {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+/>
+`;
+
+exports[`LoadingVideo renders correctly 1`] = `
+Array [
+  <Video
+    onBuffer={[Function]}
+    posterResizeMode="cover"
+    repeat={true}
+    resizeMode="cover"
+    source={
+      Object {
+        "uri": "test",
+      }
+    }
+    style={
+      Object {
+        "test": "test",
+      }
+    }
+  />,
+  <ActivityIndicator
+    animating={true}
+    color="#841584"
+    size="large"
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />,
+]
+`;
+
+exports[`Logo renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+    }
+  }
+>
+  <MockedFontAwesome5
+    color="#841584"
+    name="cat"
+    size={192}
+    style={
+      Object {
+        "marginVertical": 10,
+      }
+    }
+  />
+  <Text
+    style={
+      Object {
+        "color": "black",
+      }
+    }
+  >
+    Case Study by Denizhan Dalgic
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "black",
+      }
+    }
+  >
+    Instagram Clone
+  </Text>
+</View>
+`;
+
+exports[`NetworkIndicator renders correctly 1`] = `<View />`;
+
+exports[`SwiperImage renders correctly 1`] = `
+<RCTScrollView
+  data={
+    Array [
+      "test",
+    ]
+  }
+  decelerationRate="normal"
+  getItem={[Function]}
+  getItemCount={[Function]}
+  horizontal={true}
+  keyExtractor={[Function]}
+  onContentSizeChange={[Function]}
+  onLayout={[Function]}
+  onMomentumScrollBegin={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  showsHorizontalScrollIndicator={false}
+  snapToAlignment="start"
+  snapToInterval={750}
+  stickyHeaderIndices={Array []}
+  viewabilityConfigCallbackPairs={Array []}
+>
+  <View>
+    <View
+      onLayout={[Function]}
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          null,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Image
+          onLoadEnd={[Function]}
+          source={
+            Object {
+              "uri": "test",
+            }
+          }
+          style={
+            Object {
+              "height": 300,
+              "width": 500,
+            }
+          }
+        />
+        <ActivityIndicator
+          animating={true}
+          color="#841584"
+          size="large"
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`UserHeader renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "flexDirection": "row",
+      "marginBottom": 10,
+      "marginStart": 10,
+    }
+  }
+>
+  <MockedFontAwesome
+    color="#841584"
+    name="user-circle"
+    size={32}
+    style={
+      Object {
+        "borderRadius": 20,
+        "marginRight": 10,
+      }
+    }
+  />
+  <Text
+    style={
+      Object {
+        "color": "black",
+      }
+    }
+  >
+    test
+  </Text>
+</View>
+`;
