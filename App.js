@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 import type { Node } from 'react';
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -36,6 +36,7 @@ const App: () => Node = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="white" />
       <NavigationContainer>
         <AuthContext.Provider value={{ isSignedIn, setIsSignedIn }}>
           <Stack.Navigator
